@@ -94,8 +94,8 @@ html[data-theme="dark"] {
 /* Custom Scrollbar for Mozilla Firefox*/
 html{
   overflow-y: visible;
-  scrollbar-color: #ca9eff #f1f1f1;
-  scrollbar-width: auto;
+  scrollbar-color: #39383a #e9e6e6;
+  scrollbar-width: thin;
 }
 
 body {
@@ -105,6 +105,7 @@ body {
   color: var(--text);
   font-family: "Poppins", sans-serif;
   background-color: var(--bg);
+  cursor: none;
 }
 .text-center heading1 exp-head {
   color: white;
@@ -229,7 +230,7 @@ html {
 }
 
 .navbar-brand {
-  font-family: Agustina;
+  font-family: 'Agustina', sans-serif;                                      
   font-size: 30px;
   font-weight: bold;
 }
@@ -246,23 +247,24 @@ html {
   -webkit-appearance: none;
   position: relative;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
+  width: 74.5px;
+  height: 30px;
   background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
   background-size: cover;
   border-radius: 50px;
   outline: none;
   transition: background-image 0.9s;
-  box-shadow: 0px 2px 5px 1px gray;
+  box-shadow: 0px 2px 5px 0px gray;
+  margin:10px;
 }
 
 .dark_toggler:before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  height: 40px;
-  width: 40px;
+  left: 0px;
+  height: 30px;
+  width: 30px;
   background-color: navy;
   border-radius: 50px;
   transition: all 0.9s;
@@ -272,13 +274,13 @@ html {
 .dark_toggler:checked {
   background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
   transition: background-image 0.9s;
-  box-shadow: 0px 2px 5px 1px rgb(187, 134, 201);
+  box-shadow: 0.5px 1.8px 8px 1px rgba(158, 216, 255, 0.5);
 }
 
 .dark_toggler:checked:before {
   transform: translate(150%);
   transition: all 0.9s;
-  background-color: #bb86fc;
+  background-color: #ffffff;
 }
 /* end of dark mode toggle switch button */
 
@@ -293,7 +295,7 @@ html[light-mode="dark"] {
 }
 
 .dark-theme {
-  background-color: #2b2a2A;
+  background-color: #1f1f1f;
   transition: background-color .3s;
   box-shadow: 0 0 0;
 }
@@ -381,39 +383,69 @@ color: #ffffff !important;
 */
 
 @media only screen and (min-width: 1024px) {
-  .current-link {
-      font-weight: bolder;
-      position: relative;
-      z-index: 1;
-      text-align: center;
-  }
-  .current-link:after {
-      content: "";
-      position: absolute;
-      left: 34%;
-      margin-left: auto;
-      margin-right: auto;
-      bottom: 0;
-      width: 32%;
-      border-bottom: 3px solid #6a00bb;
-  }
+
+}
   
-  .nav-item-hover::after {
-      content: "";
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      height: 0.15em;
-      bottom: 0;
-      width: 0%;
-      background-color: #6a00bb;
-      transition: all ease-in-out 280ms;
+.nav-item-hover {
+  position: relative; /* Required for absolute positioning of the pseudo-element */
+}
+
+.nav-item-hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0.15em;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  background-color: #fc952d;
+  transition: width 280ms ease-in-out;
+}
+
+.nav-item-hover:hover::after {
+  width: 50%; /* Underline width on hover */
+}
+
+.nav-link.active {
+  position: relative;
+}
+
+/* Default width for larger screens */
+.nav-link.active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0.15em;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%; /* Default width */
+  background-color: #ffffff;
+  transition: width 280ms ease-in-out;
+}
+
+/* Medium devices (tablets, etc.) */
+@media (max-width: 768px) {
+  .nav-link.active::after {
+      width: 10%; /* Adjusted width for medium devices */
   }
-  
-  .nav-item:hover::after {
-      width: 50%;
-      
+  .nav-item-hover:hover::after {
+    width: 10%; /* Underline width on hover */
   }
+}
+
+/* Small devices (phones, etc.) */
+@media (max-width: 480px) {
+  .nav-link.active::after {
+      width: 10%; /* Adjusted width for small devices */
+  }
+  .nav-item-hover:hover::after {
+    width: 10%; /* Underline width on hover */
+  }
+}
+
+
 
   li.nav-item {
       text-align: center;
@@ -426,7 +458,7 @@ color: #ffffff !important;
   .bike {
       display: none;
   }
-}
+
 
 /* navbar hover for light mode */
 html[light-mode="light"] .nav-link{
@@ -453,7 +485,7 @@ html[light-mode="light"] .navbar-brand:hover{
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: none;
   transition: all .2s ease-in-out;
   border-color: white;
   border: none;
@@ -1091,4 +1123,13 @@ outline: none;
     margin-top: -100px;
     transform: scale(0) rotateZ(-90deg);
   }
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Prevent the canvas from blocking interactions */
 }
